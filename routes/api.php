@@ -19,4 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('user', [AuthController::class,'user']);
+Route::post('registro', [AuthController::class,'registro']);
+
+Route::post('login', [AuthController::class,'login']);
+
+Route::middleware('auth:sanctum')->group(function(){
+
+    Route::get('user', [AuthController::class,'user']);
+    Route::post('logout', [AuthController::class,'logout']);    
+});
