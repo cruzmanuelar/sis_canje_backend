@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('imagen');
             $table->integer('precio_puntos');
+            $table->integer('canje_puntos');
             $table->timestamps();
         });
     }

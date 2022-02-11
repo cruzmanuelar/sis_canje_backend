@@ -11,4 +11,14 @@ class Productoscanjeados extends Model
     protected $fillable = [
         'puntos'
     ];
+
+    public function producto(){
+        
+        return $this->belongsTo('App\Producto');
+    }
+
+    public function usuario(){
+        
+        return $this->belongsTo('App\User');
+    }
 }

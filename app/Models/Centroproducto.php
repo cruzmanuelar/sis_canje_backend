@@ -12,4 +12,14 @@ class Centroproducto extends Model
     protected $fillable = [
         'cantidad'
     ];
+
+    public function producto(){
+        
+        return $this->belongsTo(Producto::class,'id_producto');
+    }
+
+    public function centro(){
+        
+        return $this->belongsTo('App\Centro');
+    }
 }

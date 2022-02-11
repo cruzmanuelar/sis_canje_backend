@@ -22,17 +22,17 @@ class CodigoSeeder extends Seeder
         ]);
         DB::table('codigos')->insert([
             'codigo' => "PYDPY38Y",
-            'puntos' => '2',
+            'puntos' => '3',
             'id_producto' => '9',
         ]);
         DB::table('codigos')->insert([
             'codigo' => "ATYQRMFJ",
             'puntos' => '3',
-            'id_producto' => '11',
+            'id_producto' => '12',
         ]);
         DB::table('codigos')->insert([
             'codigo' => "KCDQEQB2",
-            'puntos' => '3',
+            'puntos' => '3',    
             'id_producto' => '12',
         ]);
         DB::table('codigos')->insert([
@@ -42,8 +42,8 @@ class CodigoSeeder extends Seeder
         ]);
         DB::table('codigos')->insert([
             'codigo' => "5GT9AQ2K",
-            'puntos' => '3',
-            'id_producto' => '11',
+            'puntos' => '2',
+            'id_producto' => '3',
         ]);
         DB::table('codigos')->insert([
             'codigo' => "KBNB32AQ",
@@ -119,12 +119,12 @@ class CodigoSeeder extends Seeder
 
         DB::table('codigos')->insert([
             'codigo' => "44D8E329",
-            'puntos' => '2',
+            'puntos' => '3',
             'id_producto' => '11',
         ]);
         DB::table('codigos')->insert([
             'codigo' => "7JKUD9QT",
-            'puntos' => '2',
+            'puntos' => '3',
             'id_producto' => '12',
         ]);
         DB::table('codigos')->insert([

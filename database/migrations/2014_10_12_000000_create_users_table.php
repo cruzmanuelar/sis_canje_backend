@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('puntos')->default(0);
             $table->integer('dni')->unique();
+            $table->boolean('admin')->default(false);
             $table->timestamps();
         });
     }

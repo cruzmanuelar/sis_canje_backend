@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('codigos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
+            $table->string('codigo')->unique();
             $table->integer('puntos');
             $table->boolean('canjeado')->default(false);
             $table->unsignedBigInteger('id_producto');

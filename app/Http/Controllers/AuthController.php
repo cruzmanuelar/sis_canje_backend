@@ -25,7 +25,6 @@ class AuthController extends Controller
         //     'password' => $request->input('password');
         //     'dni' => Hash::make($request->input('dni'));
         // ]);
-
         return $user;
     }
 
@@ -58,5 +57,22 @@ class AuthController extends Controller
         return response([
             'message' => 'Desconectado'
         ])->withCookie($cookie);
+    }
+
+    public function getUser(){
+
+        $usuarios = User::all();
+
+        return response()->json([ 'users' => $usuarios]);
+    }
+
+    public function getUserId($iduser){
+
+        $usuario = User::where('id', $iduser)->first();
+
+        return response()->json([
+            'usuario' => $usuario
+        ]);
+        
     }
 }

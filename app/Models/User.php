@@ -31,4 +31,9 @@ class User extends Authenticatable
         'updated_at'
     ];
 
+    public function productocanje(){
+        
+        return $this->hasMany('App\Productoscanjeados');
+    }
+
 }

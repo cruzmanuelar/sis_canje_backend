@@ -11,11 +11,18 @@ class Codigo extends Model
     protected $fillable = [
         'codigo',
         'puntos',
-        'canjeado'
+        'id_producto'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at'
     ];
+
+    public function producto(){
+        
+        return $this->belongsTo('App\Producto');
+    }
+
+    
 }

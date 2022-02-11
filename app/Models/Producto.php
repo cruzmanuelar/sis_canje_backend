@@ -12,6 +12,17 @@ class Producto extends Model
     protected $fillable = [
         'nombre',
         'precio_puntos',
+        'canje_puntos',
         'imagen'
     ];
+
+    public function codigo(){
+        
+        return $this->hasMany('App\Codigo');
+    }
+
+    public function centroproducto(){
+        
+        return $this->hasMany('App\Centroproducto');
+    }
 }

@@ -14,4 +14,9 @@ class Centro extends Model
         'direccion',
         'imagen'
     ];
+
+    public function centroproducto(){
+        
+        return $this->hasMany('App\Centroproducto');
+    }
 }
