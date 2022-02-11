@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CentroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('registro', [AuthController::class,'registro']);
+
+Route::get('productos', [ProductoController::class,'getProductos']);
+
+Route::get('codigos', [ProductoController::class,'getCodigos']);
+
+
+Route::get('centros', [CentroController::class,'getCentros']);
+
+Route::post('canjepuntos', [ProductoController::class,'canjePuntos']);
 
 Route::post('login', [AuthController::class,'login']);
 

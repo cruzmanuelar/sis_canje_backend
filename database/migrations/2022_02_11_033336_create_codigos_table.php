@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('codigos', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
+            $table->integer('puntos');
+            $table->boolean('canjeado')->default(false);
+            $table->unsignedBigInteger('id_producto');
             $table->timestamps();
+
+            $table->foreign('id_producto')->references('id')->on('productos')->onDelete("cascade");
         });
     }
 
