@@ -39,7 +39,7 @@ Route::get('centros', [CentroController::class,'getCentros']);
 //GET: Productos de centro especificado, y/o centro
 Route::get('centro-{idcentro}',[CentroController::class,'productosCentro']);
 
-//POST: Canejar puntos
+//POST: Canejar puntos FALTAAAAAAAAAAAAAAAAAAAAAAAA
 Route::post('canjepuntos', [ProductoController::class,'canjePuntos']);
 
 //GET: Obtener todos los usuarios
@@ -53,9 +53,6 @@ Route::post('registroCodigo',[CentroController::class,'registrarCodigo']);
 
 //POST: Login usuario
 Route::post('login', [AuthController::class,'login']);
-
-//POST: Canjear puntos
-Route::post('canje',[AuthController::class,'canjeUsuario']);
 
 Route::middleware('auth:sanctum')->group(function(){
 
