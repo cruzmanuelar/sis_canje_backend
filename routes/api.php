@@ -36,7 +36,7 @@ Route::get('codigos', [ProductoController::class,'getCodigos']);
 //GET: Todos los centros
 Route::get('centros', [CentroController::class,'getCentros']);
 
-//GET: Productos de centro especificado
+//GET: Productos de centro especificado, y/o centro
 Route::get('centro-{idcentro}',[CentroController::class,'productosCentro']);
 
 //POST: Canejar puntos
@@ -54,8 +54,15 @@ Route::post('registroCodigo',[CentroController::class,'registrarCodigo']);
 //POST: Login usuario
 Route::post('login', [AuthController::class,'login']);
 
+//POST: Canjear puntos
+Route::post('canje',[AuthController::class,'canjeUsuario']);
+
 Route::middleware('auth:sanctum')->group(function(){
 
+    //Get: Muestra datos del usuario que inicio sesion
     Route::get('user', [AuthController::class,'user']);
+
+    //POST: Canjear codigo por puntos
+    Route::post('canje',[AuthController::class,'canjeUsuario']);
     Route::post('logout', [AuthController::class,'logout']);    
 });

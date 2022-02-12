@@ -45,7 +45,7 @@ class CentroController extends Controller
         $errors = $validator->errors();
 
         if ($validator->fails()) {
-            return response()->json(['message' => $errors->first('codigo')]);
+            return response()->json(['message' => $errors->first('codigo'), 'status' => 'error']);
         }
         
         $idProducto = rand(1, 12);
@@ -60,7 +60,7 @@ class CentroController extends Controller
         ]);
 
         return response()->json([
-            'random' => $idProducto, 'producto' => $producto, 'registrado' => $productcode
+            'random' => $idProducto, 'producto' => $producto, 'registrado' => $productcode, 'status' => 'success'
         ]);
     }
 }

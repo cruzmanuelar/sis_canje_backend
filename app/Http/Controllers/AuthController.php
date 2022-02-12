@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Codigo;
 use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -74,5 +76,47 @@ class AuthController extends Controller
             'usuario' => $usuario
         ]);
         
+    }
+
+    public function canjeUsuario(Request $request){
+
+
+        // $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'codigo' => 'required|min:8|max:8'
+        ]);
+
+        $errors = $validator->errors();
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error']);
+        }
+
+        $existencia = Codigo::where('codigo',$request->codigo)->first();
+
+        if($existencia != null && $existencia->canjeado == false){
+
+            $usuario = User::where('id',Auth::user()->id)->first();
+
+            $usuario->puntos = $usuario->puntos + $existencia->puntos;
+            $usuario->save();
+
+            $existencia->canjeado = true;
+
+            $existencia->save();
+
+            return response()->json([
+                'message' => 'Has canjeado '. $usuario->puntos . ' puntos!'
+            ]);
+
+        }else{
+            
+            return response()->json([
+                'message' => 'Código inválido'
+            ]);
+
+        }
+
     }
 }
