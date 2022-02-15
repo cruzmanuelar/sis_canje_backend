@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Producto;
 use App\Models\Codigo;
+use App\Models\User;
+use App\Models\Productoscanjeados;
+
+
 
 class ProductoController extends Controller
 {
@@ -22,12 +27,33 @@ class ProductoController extends Controller
 
     public function canjePuntos(Request $request){
         
-        $codigo = Codigo::where('codigo',$request->codigo)->first();
+        $producto = Producto::where('id',$request->id_producto)->first();
 
-        if($codigo){
-            return response()->json(['message' => 'Has canjeado ' . $codigo->puntos . ' puntos']);
+        $usuario = User::where('id',Auth::id())->first();
+        
+        
+        if($usuario->puntos >= $producto->precio_puntos){
+                
+            $usuario->puntos = $usuario->puntos - $producto->precio_puntos;
+
+            $usuario->save();
+
+            $user = Productoscanjeados::create([
+                'puntos' => $producto->precio_puntos,
+                'id_producto' => $producto->id,
+                'id_usuario' => Auth::id()
+            ]);
+
+            return response()->json([
+                'Message' => 'Has canjeado ' . $producto->nombre . ' por ' . $producto->precio_puntos . ' puntos'
+            ]);
+            
         }else{
-            return response()->json(['message' => 'No existe el código']);
+
+            return response()->json([
+                'message' => "No cuentas con suficientes puntos"
+            ]);
         }
+
     }
 }

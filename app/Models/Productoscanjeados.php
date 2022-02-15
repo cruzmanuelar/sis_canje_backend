@@ -9,7 +9,9 @@ class Productoscanjeados extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'puntos'
+        'puntos',
+        'id_producto',
+        'id_usuario'
     ];
 
     public function producto(){

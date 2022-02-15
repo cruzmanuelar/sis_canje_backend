@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Centro;
@@ -22,17 +22,12 @@ class CentroController extends Controller
 
         $centro = Centro::where('id',$idcentro)->first();
 
-        $productos = Centroproducto::where('id_centro',$idcentro)->get();
+        $productos = DB::table('productos')
+                        ->join('centroproductos', 'productos.id', '=', 'centroproductos.id_producto')
+                        ->where('centroproductos.id_centro', '=', $idcentro)
+                        ->get();
 
-        $lista_productos = [];
-        
-        foreach ($productos as $produc) {
-
-            $producto = Producto::where('id',$produc->id_producto)->get();
-            array_push($lista_productos, $producto);
-        }
-
-        return response()->json(['centro' => $centro, 'productos' => $lista_productos], 200);
+        return response()->json(['centro' => $centro, 'productos' => $productos], 200);
 
     }
 

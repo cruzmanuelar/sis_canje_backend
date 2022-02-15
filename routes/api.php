@@ -21,17 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
-
 //GET: Registro de usuario
 Route::post('registro', [AuthController::class,'registro']);
 
 //GET: Todos los productos
 Route::get('productos', [ProductoController::class,'getProductos']);
-
-//GET: Todos los codigos
-Route::get('codigos', [ProductoController::class,'getCodigos']);
 
 //GET: Todos los centros
 Route::get('centros', [CentroController::class,'getCentros']);
@@ -39,17 +33,6 @@ Route::get('centros', [CentroController::class,'getCentros']);
 //GET: Productos de centro especificado, y/o centro
 Route::get('centro-{idcentro}',[CentroController::class,'productosCentro']);
 
-//POST: Canejar puntos FALTAAAAAAAAAAAAAAAAAAAAAAAA
-Route::post('canjepuntos', [ProductoController::class,'canjePuntos']);
-
-//GET: Obtener todos los usuarios
-Route::get('usuarios',[AuthController::class,'getUser']);
-
-//GET: Obtener usuario especifico
-Route::get('user-{iduser}',[AuthController::class,'getUserId']);
-
-//POST: Registrar codigo de producto
-Route::post('registroCodigo',[CentroController::class,'registrarCodigo']);
 
 //POST: Login usuario
 Route::post('login', [AuthController::class,'login']);
@@ -61,5 +44,24 @@ Route::middleware('auth:sanctum')->group(function(){
 
     //POST: Canjear codigo por puntos
     Route::post('canje',[AuthController::class,'canjeUsuario']);
+
+    //POST: Canejar producto por puntos
+    Route::post('canjepuntos', [ProductoController::class,'canjePuntos']);
+
+    //GET: Obtener todos los usuarios
+    Route::get('usuarios',[AuthController::class,'getUser']);
+
+    //POST: Registrar codigo de producto
+    Route::post('registroCodigo',[CentroController::class,'registrarCodigo']);
+
+    //GET: Todos los codigos
+    Route::get('codigos', [ProductoController::class,'getCodigos']);
+
+    //GET: Obtener usuario especifico
+    Route::get('user-{iduser}',[AuthController::class,'getUserId']);
+
+    //GET: Obtener todos los usuarios
+    Route::get('misCanjes',[AuthController::class,'getCanjes']);
+
     Route::post('logout', [AuthController::class,'logout']);    
 });

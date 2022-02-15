@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Codigo;
+use App\Models\Productoscanjeados;
+use Illuminate\Support\Facades\DB;
 use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,12 +23,6 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         
-        // $user = User::create([
-        //     'nombre' => $request->input('nombre');
-        //     'correo' => $request->input('correo');
-        //     'password' => $request->input('password');
-        //     'dni' => Hash::make($request->input('dni'));
-        // ]);
         return $user;
     }
 
@@ -80,9 +76,6 @@ class AuthController extends Controller
 
     public function canjeUsuario(Request $request){
 
-
-        // $user = Auth::user();
-
         $validator = Validator::make($request->all(), [
             'codigo' => 'required|min:8|max:8'
         ]);
@@ -117,6 +110,15 @@ class AuthController extends Controller
             ]);
 
         }
+    }
 
+    public function getCanjes(){
+
+        $productos = DB::table('productos')
+        ->join('productoscanjeados', 'productos.id', '=', 'productoscanjeados.id_producto')
+        ->where('productoscanjeados.id_usuario', '=', Auth::id())
+        ->get();
+
+        return response()->json(['productos' => $productos], 200);
     }
 }
