@@ -27,6 +27,9 @@ Route::post('registro', [AuthController::class,'registro']);
 //GET: Todos los productos
 Route::get('productos', [ProductoController::class,'getProductos']);
 
+//GET
+Route::get('mensaje', [AuthController::class,'mensajePrueba']);
+
 //GET: Todos los centros
 Route::get('centros', [CentroController::class,'getCentros']);
 

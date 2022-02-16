@@ -121,4 +121,11 @@ class AuthController extends Controller
 
         return response()->json(['productos' => $productos], 200);
     }
+
+    public function mensajePrueba(){
+        
+        return response()->json([
+            'message' => 'ok'
+        ]);
+    }
 }
