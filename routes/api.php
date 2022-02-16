@@ -54,13 +54,16 @@ Route::middleware('auth:sanctum')->group(function(){
     //POST: Registrar codigo de producto
     Route::post('registroCodigo',[CentroController::class,'registrarCodigo']);
 
+    //POST: Registrar producto
+    Route::post('anadirProducto',[CentroController::class,'addProduct']);
+
     //GET: Todos los codigos
     Route::get('codigos', [ProductoController::class,'getCodigos']);
 
     //GET: Obtener usuario especifico
     Route::get('user-{iduser}',[AuthController::class,'getUserId']);
 
-    //GET: Obtener todos los usuarios
+    //GET: Obtener todos los canjes
     Route::get('misCanjes',[AuthController::class,'getCanjes']);
 
     Route::post('logout', [AuthController::class,'logout']);    

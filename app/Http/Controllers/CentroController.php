@@ -58,4 +58,40 @@ class CentroController extends Controller
             'random' => $idProducto, 'producto' => $producto, 'registrado' => $productcode, 'status' => 'success'
         ]);
     }
+
+    public function addProduct(Request $request){
+
+        $existencia = Centroproducto::where('id_producto',$request->id_producto)
+                                    ->where('id_centro',$request->id_centro)
+                                    ->exists();
+
+                
+        if($existencia == true){
+
+            $producto = Centroproducto::where('id_producto',$request->id_producto)
+                                    ->where('id_centro',$request->id_centro)
+                                    ->first();
+
+            $producto->cantidad = $producto->cantidad + $request->cantidad;
+            $producto->save();
+
+            return response()->json([
+                "Message" => "Producto actualizado"
+            ]);
+        
+        }else{
+
+
+            $producto = Centroproducto::create([
+                'cantidad' => $request->cantidad,
+                'id_producto' => $request->id_producto,
+                'id_centro' => $request->id_centro
+            ]);
+
+            return response()->json([
+                "Message" => "Producto registrado y actualizado"
+            ]);
+        }
+
+    }
 }

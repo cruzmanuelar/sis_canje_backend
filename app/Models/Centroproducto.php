@@ -10,7 +10,9 @@ class Centroproducto extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cantidad'
+        'cantidad',
+        'id_producto',
+        'id_centro'
     ];
 
     public function producto(){
