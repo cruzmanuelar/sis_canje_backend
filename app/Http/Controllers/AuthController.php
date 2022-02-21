@@ -93,6 +93,9 @@ class AuthController extends Controller
             $usuario = User::where('id',Auth::user()->id)->first();
 
             $usuario->puntos = $usuario->puntos + $existencia->puntos;
+
+            $puntosTotales = $usuario->puntos;
+
             $usuario->save();
 
             $existencia->canjeado = true;
@@ -100,7 +103,8 @@ class AuthController extends Controller
             $existencia->save();
 
             return response()->json([
-                'message' => 'Has canjeado '. $usuario->puntos . ' puntos!'
+                'message' => 'Has canjeado '. $existencia->puntos . ' puntos!',
+                'puntos' => $puntosTotales
             ]);
 
         }else{

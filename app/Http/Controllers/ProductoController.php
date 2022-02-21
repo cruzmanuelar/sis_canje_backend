@@ -36,6 +36,8 @@ class ProductoController extends Controller
                 
             $usuario->puntos = $usuario->puntos - $producto->precio_puntos;
 
+            $puntosTotales = $usuario->puntos;
+
             $usuario->save();
 
             $user = Productoscanjeados::create([
@@ -45,7 +47,8 @@ class ProductoController extends Controller
             ]);
 
             return response()->json([
-                'Message' => 'Has canjeado ' . $producto->nombre . ' por ' . $producto->precio_puntos . ' puntos'
+                'Message' => 'Has canjeado ' . $producto->nombre . ' por ' . $producto->precio_puntos . ' puntos',
+                'puntos' => $puntosTotales
             ]);
             
         }else{
