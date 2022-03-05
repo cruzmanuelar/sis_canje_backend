@@ -16,6 +16,34 @@ class AuthController extends Controller
 
     public function registro(Request $request){
         
+        $validator = Validator::make($request->all(), [
+            'correo' => 'required|unique:users,correo|regex:/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/',
+            'nombre' => 'required|string|unique:users,nombre|min:4|max:15',
+            'dni' => 'required|integer|digits:8'
+        ]);
+
+        $messages = [
+            'correo.required' => 'Correo requerido',
+            'correo.unique' => 'Este correo ya fue registrado',
+            'correo.regex' => 'Correo invalido',
+            'nombre.required' => 'Usuario requerido',
+            'nombre.string' => 'Solo caracteres para el nombre',
+            'nombre.unique' => 'Este usuario ya fue registrado',
+            'nombre.min' => 'Minimo 4 caracteres para usuario',
+            'nombre.max' => 'Maximo 15 caracteres para usuario',
+            'dni.required' => 'DNI requerido',
+            'dni.integer' => 'Solo caracteres numericos',
+            'dni.digits' => 'El DNI debe tener 8 digitos'
+        ];
+
+        $validator->setCustomMessages($messages);
+
+        $errors = $validator->errors();
+
+        if ($validator->fails()) {
+            return response()->json(['Estado' => 'Fallo','Errores' => $errors]);
+        }
+
         $user = User::create([
             'nombre' => $request->nombre,
             'correo' => $request->correo,
@@ -23,7 +51,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         
-        return $user;
+        return response()->json(['Estado' => 'Registrado', 'Usuario' => $user]);
     }
 
     public function login(Request $request){

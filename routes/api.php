@@ -69,5 +69,7 @@ Route::middleware('auth:sanctum')->group(function(){
     //GET: Obtener todos los canjes
     Route::get('misCanjes',[AuthController::class,'getCanjes']);
 
-    Route::post('logout', [AuthController::class,'logout']);    
+    Route::post('logout', [AuthController::class,'logout']);
+
+    // Route::get('detalleStock',[ProductoController::class,'getStock']);
 });
