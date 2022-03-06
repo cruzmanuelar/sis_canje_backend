@@ -21,9 +21,17 @@ class ProductoController extends Controller
     }
 
     public function getCodigos(){
-        $codigos = Codigo::all();
+        
 
-        return response()->json(['data' => $codigos], 200);
+        // $codigos = Codigo::all();
+
+        $codigoProducto = DB::table('codigos')
+                        ->join('productos', 'codigos.id_producto', '=', 'productos.id')
+                        ->get();
+
+
+
+        return response()->json(['data' => $codigoProducto], 200);
     }
 
     // public function getStock(){
