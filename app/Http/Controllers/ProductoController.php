@@ -23,11 +23,11 @@ class ProductoController extends Controller
     public function getCodigos(){
         
 
-        $codigos = Codigo::all();
+        // $codigos = Codigo::all();
 
-        // $codigoProducto = DB::table('codigos')
-        //                 ->join('productos', 'codigos.id_producto', '=', 'productos.id')
-        //                 ->get();
+        $codigoProducto = DB::table('codigos')
+                        ->join('productos', 'codigos.id_producto', '=', 'productos.id')
+                        ->get();
 
 
 
